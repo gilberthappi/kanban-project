@@ -44,3 +44,61 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+# #kanban board
+
+High-Level Requirements
+Kanban Board with JSON-Driven Data
+
+Display data from a JSON structure where the top level represents work orders.
+Each work order has a status and a list of nextIds.
+Drawer for Work Orders
+
+A UI drawer that lists all work orders (Level 1 of the JSON tree).
+When a work order is selected, it populates the Kanban with the associated statuses (Level 2).
+Kanban Columns
+
+Each column represents a system status.
+Each status has tasks grouped within the respective column.
+Connecting Lines
+
+Draw lines between status tasks based on their nextIds.
+Use a pre-provided dynamic connection file or implement SVG paths to draw the lines.
+Dynamic Data Relationships
+
+When iterating over nextIds, find their matching descriptions by traversing the JSON tree.
+
+Main Structure:
+Top-Level Keys:
+
+id: Unique identifier for the workflow (integer).
+description: Description of the workflow (string).
+systemModel: The model name associated with the workflow (string).
+workTypes: Array for specifying types of work, currently empty.
+active: Indicates if the workflow is active (boolean).
+defaultWorkflow: Specifies if this is the default workflow (boolean).
+status: Array of objects, each defining a specific workflow status.
+Status Array: Each status object contains:
+
+id: Unique identifier for the status.
+code: Code representing the status.
+description: Detailed explanation of the status.
+nextIds: Array of possible next status IDs.
+editGroups: Groups authorized to edit at this status.
+viewGroups: Groups authorized to view at this status.
+statusRules: Rules applied at this status, each with a label and value.
+systemStatus: An object describing the system-level status.
+Group Arrays (editGroups, viewGroups):
+
+Each group has:
+label: The name of the group.
+value: Group ID.
+attributes: Placeholder for additional properties.
+fieldHandler: Null by default, potentially for handling dynamic fields.
+Status Rules:
+
+A set of rules defining actions or restrictions at a particular status, such as copying status to linked items or enforcing certain updates.
+systemStatus:
+
+Specifies the system-wide status mapping with a label and value.
